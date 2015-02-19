@@ -12,6 +12,7 @@ class MailboxViewController: UIViewController {
 	
 	@IBOutlet weak var containerView: UIView!
 	@IBOutlet weak var scrollView: UIScrollView!
+	@IBOutlet weak var laterIcon: UIImageView!
 	
 	// messageContainerView changes the background color
 	@IBOutlet weak var messageContainerView: UIView!
@@ -20,6 +21,7 @@ class MailboxViewController: UIViewController {
 	@IBOutlet weak var messageView: UIImageView!
 	
 	var originalMessageCenter: CGPoint!
+	var originalLaterIconCenter: CGPoint!
 
 	
     override func viewDidLoad() {
@@ -32,7 +34,13 @@ class MailboxViewController: UIViewController {
 		scrollView.contentSize = CGSize(width: 320, height: 1432)
 		messageContainerView.backgroundColor = UIColor.grayColor()
 		originalMessageCenter = messageView.center
-//		println("\(messageView.center.y)")
+
+		//initial properties of later icon
+		laterIcon.alpha = 0
+		originalLaterIconCenter = laterIcon.center
+
+		// println("\(messageView.center.x)")
+		// println("\(laterIcon.center.x)")
 		
     }
 
@@ -62,10 +70,43 @@ class MailboxViewController: UIViewController {
 		if (sender.state == UIGestureRecognizerState.Began){
 			//set the starting point of the message to its current position
 			originalMessageCenter = messageView.center
+			originalLaterIconCenter = laterIcon.center
 			
 		} else if (sender.state == UIGestureRecognizerState.Changed) {
-			//as the message is dragged, make the center it's most recent position plus the horizontal difference you drag
+			// as the message is dragged, make the center it's most recent position plus the horizontal difference you drag
 			messageView.center = CGPointMake(originalMessageCenter.x + translation.x, originalMessageCenter.y)
+			
+			// println("\(messageView.center.x)")
+			
+			//short swipe left for later
+			if (messageView.center.x < 100 && messageView.center.x > -40) {
+				messageContainerView.backgroundColor = UIColor.yellowColor()
+				laterIcon.alpha = 1
+//				println("\(messageView.center.x)")
+				
+				laterIcon.center = CGPointMake(originalLaterIconCenter.x + translation.x, originalLaterIconCenter.y)
+				println("\(laterIcon.center.x)")
+			
+			// long swipe left for list
+			}
+			else if (messageView.center.x <= -40) {
+				messageContainerView.backgroundColor = UIColor.brownColor()
+
+			// short swipe right to archive
+			}
+			else if (messageView.center.x > 220 && messageView.center.x < 360) {
+				messageContainerView.backgroundColor = UIColor.greenColor()
+			
+			// long swipe right to delete
+			}
+			else if (messageView.center.x >= 360) {
+				messageContainerView.backgroundColor = UIColor.redColor()
+			}
+			
+			// otherwise keep the background gray
+			else {
+				messageContainerView.backgroundColor = UIColor.grayColor()
+			}
 			
 			
 		} else if (sender.state == UIGestureRecognizerState.Ended) {

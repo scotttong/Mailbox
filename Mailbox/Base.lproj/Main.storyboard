@@ -40,14 +40,14 @@
                                                 <rect key="frame" x="20" y="175" width="25" height="25"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                             </imageView>
-                                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" image="later_icon" id="AN4-Kr-0J2">
-                                                <rect key="frame" x="280" y="176" width="25" height="25"/>
-                                                <autoresizingMask key="autoresizingMask"/>
-                                            </imageView>
                                             <view contentMode="scaleToFill" id="JbG-Av-xNZ" userLabel="messageContainerView">
                                                 <rect key="frame" x="0.0" y="144" width="320" height="86"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <subviews>
+                                                    <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" image="later_icon" id="AN4-Kr-0J2">
+                                                        <rect key="frame" x="270" y="31" width="25" height="25"/>
+                                                        <autoresizingMask key="autoresizingMask"/>
+                                                    </imageView>
                                                     <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" image="message" id="eU0-o5-l57">
                                                         <rect key="frame" x="0.0" y="0.0" width="320" height="86"/>
                                                         <autoresizingMask key="autoresizingMask"/>
@@ -69,6 +69,7 @@
                     </view>
                     <connections>
                         <outlet property="containerView" destination="Fed-8T-wjk" id="jEa-wp-Oug"/>
+                        <outlet property="laterIcon" destination="AN4-Kr-0J2" id="dYX-ir-lXY"/>
                         <outlet property="messageContainerView" destination="JbG-Av-xNZ" id="kmh-E7-Phs"/>
                         <outlet property="messageView" destination="eU0-o5-l57" id="Buz-pQ-ekh"/>
                         <outlet property="scrollView" destination="ml0-IB-bhO" id="aSO-N9-ftx"/>
