@@ -80,11 +80,11 @@ class MailboxViewController: UIViewController {
 			
 			//short swipe left for later
 			if (messageView.center.x < 100 && messageView.center.x > -40) {
-				messageContainerView.backgroundColor = UIColor.yellowColor()
+				messageContainerView.backgroundColor = UIColor.orangeColor()
 				laterIcon.alpha = 1
 //				println("\(messageView.center.x)")
 				
-				laterIcon.center = CGPointMake(originalLaterIconCenter.x + translation.x, originalLaterIconCenter.y)
+//				laterIcon.center = CGPointMake(originalLaterIconCenter.x + translation.x, originalLaterIconCenter.y)
 				println("\(laterIcon.center.x)")
 			
 			// long swipe left for list
