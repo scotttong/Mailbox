@@ -58,17 +58,18 @@ class MailboxViewController: UIViewController {
 		var location = sender.locationInView(view)
 		var translation = sender.translationInView(view)
 		var velocity = sender.velocityInView(view)
-
-		messageView.center.x = location.x
 		
-		
-	
 		if (sender.state == UIGestureRecognizerState.Began){
-			println("panning began")
+			//set the starting point of the message to its current position
+			originalMessageCenter = messageView.center
+			
 		} else if (sender.state == UIGestureRecognizerState.Changed) {
-//			println("panning changed")
+			//as the message is dragged, make the center it's most recent position plus the horizontal difference you drag
+			messageView.center = CGPointMake(originalMessageCenter.x + translation.x, originalMessageCenter.y)
+			
+			
 		} else if (sender.state == UIGestureRecognizerState.Ended) {
-//			println("panning ended")
+			//
 		}
 
 		
