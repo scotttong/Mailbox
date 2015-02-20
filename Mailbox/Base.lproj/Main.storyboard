@@ -32,10 +32,6 @@
                                                 <rect key="frame" x="0.0" y="102" width="320" height="42"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                             </imageView>
-                                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" image="feed" id="Txv-Wa-Zxz">
-                                                <rect key="frame" x="0.0" y="230" width="320" height="1202"/>
-                                                <autoresizingMask key="autoresizingMask"/>
-                                            </imageView>
                                             <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" image="archive_icon" id="OuS-Ed-DWS">
                                                 <rect key="frame" x="20" y="175" width="25" height="25"/>
                                                 <autoresizingMask key="autoresizingMask"/>
@@ -45,7 +41,19 @@
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <subviews>
                                                     <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" image="later_icon" id="AN4-Kr-0J2">
-                                                        <rect key="frame" x="270" y="31" width="25" height="25"/>
+                                                        <rect key="frame" x="277.5" y="31" width="25" height="25"/>
+                                                        <autoresizingMask key="autoresizingMask"/>
+                                                    </imageView>
+                                                    <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" image="list_icon" id="AQK-sx-QkU">
+                                                        <rect key="frame" x="203" y="31" width="25" height="25"/>
+                                                        <autoresizingMask key="autoresizingMask"/>
+                                                    </imageView>
+                                                    <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" image="archive_icon" id="fz8-h5-Kw3">
+                                                        <rect key="frame" x="17.5" y="28" width="25" height="25"/>
+                                                        <autoresizingMask key="autoresizingMask"/>
+                                                    </imageView>
+                                                    <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" image="delete_icon" id="ABr-jv-Vpk">
+                                                        <rect key="frame" x="127" y="30" width="25" height="25"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                     </imageView>
                                                     <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" image="message" id="eU0-o5-l57">
@@ -59,19 +67,55 @@
                                                 </subviews>
                                                 <color key="backgroundColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             </view>
+                                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" image="feed" id="Txv-Wa-Zxz">
+                                                <rect key="frame" x="0.0" y="230" width="320" height="1202"/>
+                                                <autoresizingMask key="autoresizingMask"/>
+                                            </imageView>
+                                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" image="reschedule" id="Xky-QE-hjX">
+                                                <rect key="frame" x="320" y="0.0" width="320" height="568"/>
+                                                <autoresizingMask key="autoresizingMask"/>
+                                                <gestureRecognizers/>
+                                                <connections>
+                                                    <outletCollection property="gestureRecognizers" destination="vQ5-2g-Xo9" appends="YES" id="2TF-fq-anu"/>
+                                                </connections>
+                                            </imageView>
+                                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" image="list" id="X9K-bA-XHW">
+                                                <rect key="frame" x="320" y="0.0" width="320" height="568"/>
+                                                <autoresizingMask key="autoresizingMask"/>
+                                                <gestureRecognizers/>
+                                                <connections>
+                                                    <outletCollection property="gestureRecognizers" destination="p7G-Rl-jKa" appends="YES" id="RKH-sv-Q9i"/>
+                                                </connections>
+                                            </imageView>
                                         </subviews>
                                     </scrollView>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="jqj-ax-J4w" userLabel="Reset button">
+                                <rect key="frame" x="0.0" y="488" width="320" height="80"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="didPressResetButton:" destination="r9s-oA-QM2" eventType="touchUpInside" id="Fg3-aZ-p8c"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <connections>
+                        <outlet property="archiveIcon" destination="fz8-h5-Kw3" id="ZCC-Oc-fMh"/>
                         <outlet property="containerView" destination="Fed-8T-wjk" id="jEa-wp-Oug"/>
+                        <outlet property="deleteIcon" destination="ABr-jv-Vpk" id="bDh-JG-OzC"/>
+                        <outlet property="feedImageView" destination="Txv-Wa-Zxz" id="mQg-9A-7vi"/>
                         <outlet property="laterIcon" destination="AN4-Kr-0J2" id="dYX-ir-lXY"/>
+                        <outlet property="listIcon" destination="AQK-sx-QkU" id="M2e-iu-EAg"/>
+                        <outlet property="listImageView" destination="X9K-bA-XHW" id="2Rl-rV-IrG"/>
                         <outlet property="messageContainerView" destination="JbG-Av-xNZ" id="kmh-E7-Phs"/>
                         <outlet property="messageView" destination="eU0-o5-l57" id="Buz-pQ-ekh"/>
+                        <outlet property="rescheduleImageView" destination="Xky-QE-hjX" id="6OP-fh-SOY"/>
                         <outlet property="scrollView" destination="ml0-IB-bhO" id="aSO-N9-ftx"/>
                     </connections>
                 </viewController>
@@ -81,17 +125,31 @@
                         <action selector="didPanMessage:" destination="r9s-oA-QM2" id="dfl-vG-nqR"/>
                     </connections>
                 </panGestureRecognizer>
+                <tapGestureRecognizer id="vQ5-2g-Xo9" userLabel="reschedule">
+                    <connections>
+                        <action selector="didTapReschedulePane:" destination="r9s-oA-QM2" id="UCa-a7-2lP"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <tapGestureRecognizer id="p7G-Rl-jKa" userLabel="list ">
+                    <connections>
+                        <action selector="didTapListPane:" destination="r9s-oA-QM2" id="sEZ-dX-fTv"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="280" y="384"/>
         </scene>
     </scenes>
     <resources>
         <image name="archive_icon" width="25" height="25"/>
+        <image name="delete_icon" width="25" height="25"/>
         <image name="feed" width="320" height="1202"/>
         <image name="help_label" width="320" height="37"/>
         <image name="later_icon" width="25" height="25"/>
+        <image name="list" width="320" height="568"/>
+        <image name="list_icon" width="25" height="25"/>
         <image name="message" width="320" height="86"/>
         <image name="nav" width="320" height="65"/>
+        <image name="reschedule" width="320" height="568"/>
         <image name="search" width="320" height="42"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
