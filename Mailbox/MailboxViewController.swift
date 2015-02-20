@@ -41,6 +41,7 @@ class MailboxViewController: UIViewController {
 
 		// println("\(messageView.center.x)")
 		// println("\(laterIcon.center.x)")
+		println("\(messageView.frame.width)")
 		
     }
 
@@ -75,8 +76,9 @@ class MailboxViewController: UIViewController {
 		} else if (sender.state == UIGestureRecognizerState.Changed) {
 			// as the message is dragged, make the center it's most recent position plus the horizontal difference you drag
 			messageView.center = CGPointMake(originalMessageCenter.x + translation.x, originalMessageCenter.y)
+//			laterIcon.center = CGPointMake(originalLaterIconCenter.x + translation.x, originalLaterIconCenter.y)
 			
-			// println("\(messageView.center.x)")
+			println("\(messageView.center.x)")
 			
 			//short swipe left for later
 			if (messageView.center.x < 100 && messageView.center.x > -40) {
@@ -84,33 +86,57 @@ class MailboxViewController: UIViewController {
 				laterIcon.alpha = 1
 //				println("\(messageView.center.x)")
 				
-//				laterIcon.center = CGPointMake(originalLaterIconCenter.x + translation.x, originalLaterIconCenter.y)
-				println("\(laterIcon.center.x)")
+//				laterIcon.center = CGPointMake(messageView.frame.width + 20 + translation.x , messageView.center.y)
 			
-			// long swipe left for list
 			}
+			// long swipe left for list
 			else if (messageView.center.x <= -40) {
 				messageContainerView.backgroundColor = UIColor.brownColor()
 
-			// short swipe right to archive
+			
 			}
+			// short swipe right to archive
 			else if (messageView.center.x > 220 && messageView.center.x < 360) {
 				messageContainerView.backgroundColor = UIColor.greenColor()
 			
-			// long swipe right to delete
 			}
+			// long swipe right to delete
 			else if (messageView.center.x >= 360) {
 				messageContainerView.backgroundColor = UIColor.redColor()
 			}
 			
 			// otherwise keep the background gray
 			else {
+				laterIcon.alpha = 0.5
 				messageContainerView.backgroundColor = UIColor.grayColor()
 			}
 			
 			
 		} else if (sender.state == UIGestureRecognizerState.Ended) {
-			//
+			//short swipe left for later
+			if (messageView.center.x < 100 && messageView.center.x > -40){
+				//
+			}
+			
+			// long swipe left for list
+			else if (messageView.center.x <= -40) {
+				//
+			}
+			
+			// short swipe right to archive
+			else if (messageView.center.x > 220 && messageView.center.x < 360) {
+				//
+				
+			}
+			// long swipe right to delete
+			else if (messageView.center.x >= 360) {
+				//
+			}
+			else {
+				UIView.animateWithDuration(0.2, animations: { () -> Void in
+					self.messageView.center.x = self.view.frame.width/2
+				})
+			}
 		}
 
 		
