@@ -151,12 +151,29 @@ class MailboxViewController: UIViewController {
 				deleteIcon.center = CGPointMake(translation.x - gutter, messageView.center.y)
 			}
 			
+			// opacity for later icon
+//			else if (messageView.center.x < 160 &&  messageView.center.x > 100) {
+//				println("gray area")
+//				messageContainerView.backgroundColor = UIColor(red: 191/255, green: 191/255, blue: 191/255, alpha: 1)
+//				laterIcon.center = CGPointMake(originalLaterIconCenter.x, originalLaterIconCenter.y)
+//
+//
+//				var offset:CGFloat!
+//				
+//
+//			}
+			
 			// otherwise keep the background gray
 			else {
+				
 				// ??? Use velocity here to change opacity?
 				
-				laterIcon.alpha = 0.5
-				archiveIcon.alpha = 0.5
+				
+			
+				laterIcon.alpha = -translation.x / 60
+				archiveIcon.alpha = translation.x / 60
+				
+			
 				messageContainerView.backgroundColor = UIColor(red: 191/255, green: 191/255, blue: 191/255, alpha: 1)
 				laterIcon.center = CGPointMake(originalLaterIconCenter.x, originalLaterIconCenter.y)
 				archiveIcon.center = originalArchiveIconCenter
@@ -167,29 +184,29 @@ class MailboxViewController: UIViewController {
 		}
 		// PAN ENDED
 		else if (sender.state == UIGestureRecognizerState.Ended) {
-			//short swipe left for later
+			// later
 			if (messageView.center.x < 100 && messageView.center.x > -40){
 				UIView.animateWithDuration(0.5, animations: { () -> Void in
 					self.messageView.center.x = -self.view.frame.width
-					self.laterIcon.center.x = self.messageView.center.x + self.gutter
+					self.laterIcon.center.x = self.messageView.center.x + self.messageView.frame.width/2 + self.gutter
 					self.rescheduleImageView.alpha = 1
 
 				})
 				
 			}
 			
-			// long swipe left for list
+			// list
 			else if (messageView.center.x <= -40) {
 				UIView.animateWithDuration(0.5, animations: { () -> Void in
 					self.messageView.center.x = -self.view.frame.width
-					self.listIcon.center.x = self.messageView.center.x + self.gutter
+					self.listIcon.center.x = self.messageView.center.x + self.messageView.frame.width/2 + self.gutter
 					self.listImageView.alpha = 1
 					
 				})
 
 			}
 			
-			// short swipe right to archive
+			// archive
 			else if (messageView.center.x > 220 && messageView.center.x < 360) {
 				UIView.animateWithDuration(0.5, animations: { () -> Void in
 					self.messageView.center.x = self.view.frame.width * 2
@@ -204,8 +221,10 @@ class MailboxViewController: UIViewController {
 				})
 				
 				
+				
+				
 			}
-			// long swipe right to delete
+			// delete
 			else if (messageView.center.x >= 360) {
 				UIView.animateWithDuration(0.5, animations: { () -> Void in
 					self.messageView.center.x = self.view.frame.width * 2
@@ -231,23 +250,23 @@ class MailboxViewController: UIViewController {
 	}
 	@IBAction func didTapReschedulePane(sender: UITapGestureRecognizer) {
 		println("tap")
+		self.archiveIcon.alpha = 0
 		UIView.animateWithDuration(0.4, animations: { () -> Void in
 			self.rescheduleImageView.alpha = 0
 			self.messageView.center.x = self.view.frame.width/2
-			self.laterIcon.center.x = self.messageView.center.x + self.gutter
-			self.laterIcon.center = CGPointMake(self.originalLaterIconCenter.x, self.originalLaterIconCenter.y)
-
+			self.laterIcon.center.x = self.messageView.center.x + self.messageView.frame.width/2 + self.gutter
 		})
 
 
 	}
 
 	@IBAction func didTapListPane(sender: UITapGestureRecognizer) {
+		self.archiveIcon.alpha = 0
 		UIView.animateWithDuration(0.4, animations: { () -> Void in
 			self.listImageView.alpha = 0
 			self.messageView.center.x = self.view.frame.width/2
-			self.listIcon.center.x = self.messageView.center.x + self.gutter
-//			self.laterIcon.center = CGPointMake(self.originalLaterIconCenter.x, self.originalLaterIconCenter.y)
+			self.listIcon.center.x = self.messageView.center.x + self.messageView.frame.width/2 + self.gutter
+
 			
 		})
 	}
