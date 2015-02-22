@@ -294,8 +294,8 @@ class MailboxViewController: UIViewController {
 	
 	func onEdgePan(sender:UIScreenEdgePanGestureRecognizer) {
 		var translation = sender.translationInView(view)
-		var location = sender.locationInView(view)
-		println("edge pan")
+//		var location = sender.locationInView(view)
+//		println("edge pan")
 		
 		if (sender.state == UIGestureRecognizerState.Began){
 			println("edge pan began")
