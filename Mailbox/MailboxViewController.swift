@@ -292,13 +292,16 @@ class MailboxViewController: UIViewController {
 		
 	}
 	
+	
+	// EDGE PAN WHEN GESTURE RECOGNIZER WAS ADDED PROGRAMATICALLY
+	
 	func onEdgePan(sender:UIScreenEdgePanGestureRecognizer) {
 		var translation = sender.translationInView(view)
 //		var location = sender.locationInView(view)
 //		println("edge pan")
 		
 		if (sender.state == UIGestureRecognizerState.Began){
-			println("edge pan began")
+//			println("edge pan began")
 			
 			originalContainerViewCenterX = containerView.center.x
 			
@@ -307,12 +310,12 @@ class MailboxViewController: UIViewController {
 //			}
 		}
 		else if (sender.state == UIGestureRecognizerState.Changed) {
-			println("edge pan changed")
+//			println("edge pan changed")
 			containerView.center.x = originalContainerViewCenterX + translation.x
 		}
 		
 		else if (sender.state == UIGestureRecognizerState.Ended) {
-			println("edge pan ended")
+//			println("edge pan ended")
 			if (translation.x < 100) {
 				UIView.animateWithDuration(0.5, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 1, options: nil, animations: { () -> Void in
 					self.containerView.center.x = 160
@@ -327,10 +330,44 @@ class MailboxViewController: UIViewController {
 				})
 				
 			}
-			
-			
 		
 		}
 	}
+	
+	// PAN GESTURE TO RETURN MENU BACK TO ORIGINAL POSITION
+	
+	/*
+	@IBAction func didPanContainerView(sender: UIPanGestureRecognizer) {
+		var translation = sender.translationInView(view)
+		
+		if (sender.state == UIGestureRecognizerState.Began){
+			println("edge pan2 began")
+			
+			originalContainerViewCenterX = containerView.center.x
+			
+			//			if (self.containerView.center.x <= 160) {
+			//			self.containerView.center = CGPointMake(self.containerView.center.x + translation.x, self.containerView.center.y)
+			//			}
+		}
+		else if (sender.state == UIGestureRecognizerState.Changed) {
+			println("edge pan2 changed")
+			containerView.center.x = originalContainerViewCenterX + translation.x
+		}
+			
+		else if (sender.state == UIGestureRecognizerState.Ended) {
+			println("edge pan2 ended")
+			if (translation.x >= 100 && self.containerView.center.x == 440) {
+				UIView.animateWithDuration(0.5, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 1, options: nil, animations: { () -> Void in
+					self.containerView.center.x = 440
+					}, completion: { (Bool) -> Void in
+						//
+				})
+				
+			}
+			
+		}
+		
+		
+	} */
 	
 }
