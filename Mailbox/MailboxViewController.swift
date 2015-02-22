@@ -32,6 +32,7 @@ class MailboxViewController: UIViewController {
 	var originalDeleteIconCenter: CGPoint!
 	var originalFeedCenter: CGPoint!
 	var gutter: CGFloat!
+	var originalContainerViewCenterX: CGFloat!
 
 	
     override func viewDidLoad() {
@@ -46,7 +47,6 @@ class MailboxViewController: UIViewController {
 		originalMessageCenter = messageView.center
 
 		//initial values
-//		laterIcon.alpha = 0
 		listIcon.alpha = 0
 		deleteIcon.alpha = 0
 		
@@ -61,11 +61,14 @@ class MailboxViewController: UIViewController {
 		listImageView.alpha = 0
 		listImageView.center = view.center
 		
+		originalContainerViewCenterX = 160
 
-//		println("\(originalFeedCenter.y)")
+		// println("\(originalFeedCenter.y)")
 		// println("\(messageView.center.x)")
 		// println("\(laterIcon.center.x)")
 		// println("\(messageView.frame.width)")
+		
+		
 		
     }
 
@@ -92,11 +95,16 @@ class MailboxViewController: UIViewController {
 		var translation = sender.translationInView(view)
 		var velocity = sender.velocityInView(view)
 		
+		var edgeGesture = UIScreenEdgePanGestureRecognizer(target: self, action: "onEdgePan:")
+		edgeGesture.edges = UIRectEdge.Left
+		containerView.addGestureRecognizer(edgeGesture)
+		
+		
 		// PAN BEGAN
 		if (sender.state == UIGestureRecognizerState.Began){
 			//set the starting point of the message to its current position
 			originalMessageCenter = messageView.center
-//			originalLaterIconCenter = laterIcon.center
+
 			
 			archiveIcon.alpha = 0
 			deleteIcon.alpha = 0
@@ -119,7 +127,7 @@ class MailboxViewController: UIViewController {
 				listIcon.alpha = 0
 				laterIcon.alpha = 1
 				laterIcon.center = CGPointMake(messageView.frame.width + gutter + translation.x, messageView.center.y)
-//				println("\(laterIcon.center)")
+				//println("\(laterIcon.center)")
 			
 			
 			}
@@ -151,18 +159,7 @@ class MailboxViewController: UIViewController {
 				deleteIcon.center = CGPointMake(translation.x - gutter, messageView.center.y)
 			}
 			
-			// opacity for later icon
-//			else if (messageView.center.x < 160 &&  messageView.center.x > 100) {
-//				println("gray area")
-//				messageContainerView.backgroundColor = UIColor(red: 191/255, green: 191/255, blue: 191/255, alpha: 1)
-//				laterIcon.center = CGPointMake(originalLaterIconCenter.x, originalLaterIconCenter.y)
-//
-//
-//				var offset:CGFloat!
-//				
-//
-//			}
-			
+				
 			// otherwise keep the background gray
 			else {
 				
@@ -278,6 +275,8 @@ class MailboxViewController: UIViewController {
 
 	@IBAction func didPressMenuButton(sender: AnyObject) {
 		if (containerView.center.x == view.frame.width/2) {
+
+			
 			UIView.animateWithDuration(0.3, animations: { () -> Void in
 				self.containerView.center.x += 280
 			})
@@ -292,4 +291,46 @@ class MailboxViewController: UIViewController {
 		
 		
 	}
+	
+	func onEdgePan(sender:UIScreenEdgePanGestureRecognizer) {
+		var translation = sender.translationInView(view)
+		var location = sender.locationInView(view)
+		println("edge pan")
+		
+		if (sender.state == UIGestureRecognizerState.Began){
+			println("edge pan began")
+			
+			originalContainerViewCenterX = containerView.center.x
+			
+//			if (self.containerView.center.x <= 160) {
+//			self.containerView.center = CGPointMake(self.containerView.center.x + translation.x, self.containerView.center.y)
+//			}
+		}
+		else if (sender.state == UIGestureRecognizerState.Changed) {
+			println("edge pan changed")
+			containerView.center.x = originalContainerViewCenterX + translation.x
+		}
+		
+		else if (sender.state == UIGestureRecognizerState.Ended) {
+			println("edge pan ended")
+			if (translation.x < 100) {
+				UIView.animateWithDuration(0.5, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 1, options: nil, animations: { () -> Void in
+					self.containerView.center.x = 160
+					}, completion: { (Bool) -> Void in
+						//
+				})
+			} else if (translation.x >= 100) {
+				UIView.animateWithDuration(0.5, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 1, options: nil, animations: { () -> Void in
+					self.containerView.center.x = 440
+					}, completion: { (Bool) -> Void in
+						//
+				})
+				
+			}
+			
+			
+		
+		}
+	}
+	
 }
