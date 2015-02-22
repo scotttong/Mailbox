@@ -30,6 +30,6 @@ Optional Exercises:
  * [x] Optional: If the menu is being revealed when the user lifts their finger, it should continue revealing.
  * [x] Optional: If the menu is being hidden when the user lifts their finger, it should continue hiding. (sorta)
  
-![dropbox_user_stories](https://cloud.githubusercontent.com/assets/1504818/6102356/c9f57f5a-afe9-11e4-89ac-d4a319665c92.gif)
+![dropbox_user_stories](https://github.com/scotttong/Mailbox/blob/master/mailbox_user_stories.gif)
 
 GIF created with [LiceCap](http://www.cockos.com/licecap/).
